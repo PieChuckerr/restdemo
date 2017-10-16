@@ -1,0 +1,44 @@
+buildscript {
+	ext {
+		springBootVersion = '1.5.7.RELEASE'
+	}
+	repositories {
+		mavenCentral()
+	}
+	dependencies {
+		classpath("org.springframework.boot:spring-boot-gradle-plugin:${springBootVersion}")
+	}
+}
+
+apply plugin: 'java'
+apply plugin: 'eclipse'
+apply plugin: 'org.springframework.boot'
+
+group = 'com.example'
+version = '0.0.1-SNAPSHOT'
+sourceCompatibility = 1.8
+
+repositories {
+	mavenCentral()
+	jcenter()
+}
+
+
+dependencies {
+	compile('org.springframework.boot:spring-boot-starter-cache')
+	compile('org.springframework.boot:spring-boot-starter-data-rest')
+	compile('org.springframework.boot:spring-boot-starter-hateoas')
+	compile('org.springframework.boot:spring-boot-starter-jdbc')
+	compile('org.springframework.boot:spring-boot-starter-jersey')
+	compile('org.springframework.boot:spring-boot-starter-security')
+//	compile('org.springframework.session:spring-session')
+	compile('org.springframework.boot:spring-boot-starter-web')
+	runtime('org.apache.derby:derby')
+	testCompile('org.springframework.boot:spring-boot-starter-test')
+	testCompile('info.cukes:cucumber-java:1.2.4')
+	testCompile('info.cukes:cucumber-junit:1.2.4')
+	testCompile ("info.cukes:cucumber-spring:1.2.4")
+	testCompile('org.springframework.security:spring-security-test')
+	testCompile('io.springfox:springfox-swagger2:2.6.1')
+	testCompile('io.springfox:springfox-swagger-ui:2.4.0')
+}
