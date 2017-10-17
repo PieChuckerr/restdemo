@@ -1,5 +1,6 @@
 package com.example.restdemo.web;
 
+import com.example.restdemo.model.Comment;
 import com.example.restdemo.model.Message;
 import com.example.restdemo.resource.MessageResource;
 import com.example.restdemo.service.MessageService;
@@ -12,6 +13,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.mvc.method.annotation.MvcUriComponentsBuilder;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
+import org.yaml.snakeyaml.tokens.CommentToken;
 
 import javax.ws.rs.core.MediaType;
 import java.net.URI;
@@ -67,16 +69,6 @@ public class MessageController {
         return ResponseEntity.status(204).build();
     }
 
-    @GetMapping(value="/add/{firstNumber}/{secondNumber}", produces = MediaType.TEXT_PLAIN)
-    public ResponseEntity<Double> add(@PathVariable("firstNumber") String firstNumber, @PathVariable("secondNumber") String secondNumber)
-    {
-        if(!firstNumber.matches(".*\\d+.*"))
-            throw new NumberFormatException("First value is not number");
-        else if(!secondNumber.matches(".*\\d+.*"))
-            throw new NumberFormatException("First value is not number");
-
-        return ResponseEntity.ok(Double.parseDouble(firstNumber)+Double.parseDouble(secondNumber));
-    }
 }
 
 /*
