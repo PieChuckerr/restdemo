@@ -14,9 +14,30 @@ public class ProfileServiceImpl implements ProfileService {
     @Autowired
     ProfileDao profileDao;
 
-
     @Override
     public List<Profile> getAllProfiles() {
         return profileDao.getAll();
     }
+
+    @Override
+    public Profile getProfile(long profileId) {
+        return profileDao.get(profileId);
+    }
+
+    @Override
+    public Profile createProfile(Profile profile) {
+        return profileDao.persist(profile);
+    }
+
+    @Override
+    public Profile updateProfile(long profileId, Profile profile) {
+        return profileDao.update(profileId,profile);
+    }
+
+    @Override
+    public boolean deleteProfile(long profileId) {
+        return profileDao.delete(profileId);
+    }
+
+
 }
