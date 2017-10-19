@@ -1,6 +1,8 @@
 package com.example.restdemo.daoimpl;
 
 import com.example.restdemo.dao.ProfileDao;
+import com.example.restdemo.exception.InvalidProfileIdException;
+import com.example.restdemo.exception.ProfileException;
 import com.example.restdemo.model.Profile;
 import com.example.restdemo.util.DbStoreStub;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -20,7 +22,12 @@ public class ProfileDaoJdbc implements ProfileDao {
     }
 
     @Override
-    public Profile get(long profileId) {
+    public Profile get(long profileId) throws ProfileException {
+
+        if(profileId == 0 || profileId < 0 || profileId > DbStoreStub.nextProfileId) {
+            throw new InvalidProfileIdException ("Invalid Profile ID: "+profileId);
+        }
+
         return dbStoreStub.profileMap.get(profileId);
     }
 

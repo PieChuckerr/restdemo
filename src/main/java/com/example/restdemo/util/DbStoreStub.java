@@ -11,7 +11,7 @@ import java.util.Map;
 public class DbStoreStub {
     public Map<Long, Message> messageMap = new HashMap<>();
     public Map<Long, Profile> profileMap = new HashMap<>();
-    static long nextProfileId;
+    public static long nextProfileId;
     public long id;
 
     {
