@@ -8,7 +8,6 @@ import java.util.List;
 public class Message {
     long id;
     long sentByProfileId;
-    long sentToProfileId;
 
     @JsonIgnore
     int commentId=0;
@@ -25,9 +24,10 @@ public class Message {
         this.commentId++;
     }
 
-    public Message(long id, String message) {
+    public Message(long id, String message, long sentByProfileId) {
         this.id = id;
         this.message = message;
+        this.sentByProfileId = sentByProfileId;
     }
 
     public long getSentByProfileId() {
@@ -36,14 +36,6 @@ public class Message {
 
     public void setSentByProfileId(long sentByProfileId) {
         this.sentByProfileId = sentByProfileId;
-    }
-
-    public long getSentToProfileId() {
-        return sentToProfileId;
-    }
-
-    public void setSentToProfileId(long sentToProfileId) {
-        this.sentToProfileId = sentToProfileId;
     }
 
     public void setComments(List<Comment> comments) {
@@ -82,7 +74,6 @@ public class Message {
 
         if (id != message1.id) return false;
         if (sentByProfileId != message1.sentByProfileId) return false;
-        if (sentToProfileId != message1.sentToProfileId) return false;
         if (commentId != message1.commentId) return false;
         if (message != null ? !message.equals (message1.message) : message1.message != null) return false;
         return comments != null ? comments.equals (message1.comments) : message1.comments == null;
@@ -92,7 +83,6 @@ public class Message {
     public int hashCode() {
         int result = (int) (id ^ (id >>> 32));
         result = 31 * result + (int) (sentByProfileId ^ (sentByProfileId >>> 32));
-        result = 31 * result + (int) (sentToProfileId ^ (sentToProfileId >>> 32));
         result = 31 * result + commentId;
         result = 31 * result + (message != null ? message.hashCode () : 0);
         result = 31 * result + (comments != null ? comments.hashCode () : 0);
@@ -104,7 +94,6 @@ public class Message {
         return "Message{" +
                 "id=" + id +
                 ", sentByProfileId=" + sentByProfileId +
-                ", sentToProfileId=" + sentToProfileId +
                 ", commentId=" + commentId +
                 ", message='" + message + '\'' +
                 ", comments=" + comments +

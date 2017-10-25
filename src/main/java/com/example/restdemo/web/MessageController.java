@@ -1,5 +1,6 @@
 package com.example.restdemo.web;
 
+import com.example.restdemo.exception.ProfileException;
 import com.example.restdemo.model.Comment;
 import com.example.restdemo.model.Message;
 import com.example.restdemo.resource.MessageResource;
@@ -42,7 +43,16 @@ public class MessageController {
 
     @PostMapping(value="/", produces = MediaType.APPLICATION_JSON, consumes = MediaType.APPLICATION_JSON)
     public ResponseEntity<?> sendMessage(@RequestBody Message message){
-        MessageResource messageResource = new MessageResource(messageService.sendMessage(message));
+        MessageResource messageResource = null;
+
+        try
+        {
+            messageResource = new MessageResource(messageService.sendMessage(message));
+        }
+        catch (ProfileException profileException) {
+            profileException.getMessage();
+        }
+
         final URI uri = MvcUriComponentsBuilder.fromController(getClass()).path("/{id}").buildAndExpand(messageResource.message.getId()).toUri();
         messageResource.add();
         return ResponseEntity.created(uri).body(messageResource);

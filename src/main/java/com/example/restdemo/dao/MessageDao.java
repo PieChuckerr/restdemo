@@ -14,4 +14,6 @@ public interface MessageDao {
     Message update(Long id, Message message);
 
     List<Message> getAllTheMessages();
+
+    List<Message> getMessageSentByProfileId(long profileId);
 }

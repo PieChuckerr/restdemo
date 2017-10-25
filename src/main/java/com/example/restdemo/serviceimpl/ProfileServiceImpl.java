@@ -1,6 +1,7 @@
 package com.example.restdemo.serviceimpl;
 
 import com.example.restdemo.dao.ProfileDao;
+import com.example.restdemo.exception.ProfileException;
 import com.example.restdemo.model.Profile;
 import com.example.restdemo.service.ProfileService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -20,7 +21,7 @@ public class ProfileServiceImpl implements ProfileService {
     }
 
     @Override
-    public Profile getProfile(long profileId) {
+    public Profile getProfile(long profileId) throws ProfileException {
         return profileDao.get(profileId);
     }
 

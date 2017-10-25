@@ -2,6 +2,7 @@ package com.example.restdemo.serviceimpl;
 
 import com.example.restdemo.dao.MessageDao;
 import com.example.restdemo.dao.ProfileDao;
+import com.example.restdemo.exception.ProfileException;
 import com.example.restdemo.exception.ProfileNotFoundException;
 import com.example.restdemo.model.Message;
 import com.example.restdemo.model.Profile;
@@ -30,17 +31,11 @@ public class MessageServiceImpl implements MessageService {
     }
 
     @Override
-    public Message sendMessage(Message message) {
+    public Message sendMessage(Message message) throws ProfileException {
         Profile profile = profileDao.get (message.getSentByProfileId ());
 
         if(profile == null) {
             throw new ProfileNotFoundException ("No profile found for the profile ID:" +message.getSentByProfileId ());
-        }
-
-        profile = profileDao.get (message.getSentToProfileId ());
-
-        if(profile == null) {
-            throw new ProfileNotFoundException ("No profile found for the profile ID:" +message.getSentToProfileId ());
         }
 
         return messageDao.persist(message);
